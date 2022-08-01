@@ -71,8 +71,8 @@ functions:
         Action:
           - "dynamodb:DeleteItem"
         Resource: !GetAtt PacientesTable.Arn
-  getAllPaciente:
-    handler: api.getAllPaciente
+  getAllPacientes:
+    handler: api.getAllPacientes
     name: get-all-paciente
     memorySize: 128 # mb
     timeout: 5 # seconds

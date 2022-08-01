@@ -73,7 +73,7 @@ const updatePaciente = async (event) => {
         const objKeys = Object.keys(body);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ postId: event.pathParameters.postId }),
+            Key: marshall({ pacienteId: event.pathParameters.pacienteId }),
             UpdateExpression: `SET ${objKeys.map((_, index) => `#key${index} = :value${index}`).join(", ")}`,
             ExpressionAttributeNames: objKeys.reduce((acc, key, index) => ({
                 ...acc,
@@ -109,7 +109,7 @@ const deletePaciente = async (event) => {
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ postId: event.pathParameters.postId }),
+            Key: marshall({ pacienteId: event.pathParameters.pacienteId }),
             
         };
         const deleteResult = await db.send(new DeleteItemCommand(params));
