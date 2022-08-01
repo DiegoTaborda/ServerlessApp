@@ -9,7 +9,7 @@ provider:
     DYNAMODB_TABLE_NAME: ${self:custom.pacientesTableName} 
 
 custom:
-  postsTableName: pacientes-table-${self:provider.stage}
+  pacientesTableName: pacientes-table-${self:provider.stage}
 
 plugins:
   - serverless-iam-roles-per-function
@@ -93,10 +93,10 @@ resources:
       Properties:
         TableName: ${self:custom.pacientesTableName}
         AttributeDefinitions:
-          - AttributeName: postId
+          - AttributeName: pacienteId
             AttributeType: S
         KeySchema:
-          - AttributeName: postId
+          - AttributeName: pacienteId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
