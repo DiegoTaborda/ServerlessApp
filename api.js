@@ -1,4 +1,4 @@
-const db = require('./db');
+const db = require("./db");
 const {
     GetItemCommand,
     PutItemCommand,
@@ -20,7 +20,7 @@ const getPaciente = async (event) => {
 
         console.log({ Item });
         response.body = JSON.stringify({
-            message: "Successfully retrived paciente.",
+            message: "Successfully retrieved paciente.",
             data: (Item) ? unmarshall(Item) : {},
             rawData: Item,
         });
@@ -88,7 +88,7 @@ const updatePaciente = async (event) => {
 
         response.body = JSON.stringify({
             message: "Successfully updated paciente.",
-            createResult,
+            updateResult,
         });
     } catch (e) {
         console.error(e);
@@ -116,7 +116,7 @@ const deletePaciente = async (event) => {
 
         response.body = JSON.stringify({
             message: "Successfully deleted paciente.",
-            createResult,
+            deleteResult,
         });
     } catch (e) {
         console.error(e);
@@ -131,7 +131,7 @@ const deletePaciente = async (event) => {
     return response;
 };
 
-const getAllPacientes = async (event) => {
+const getAllPacientes = async () => {
     const response = { statusCode: 200 };
 
     try {
@@ -146,7 +146,7 @@ const getAllPacientes = async (event) => {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to retrieved paciente",
+            message: "Failed to retrieve paciente",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -155,7 +155,7 @@ const getAllPacientes = async (event) => {
     return response;
 };
 
-modules.exports = {
+module.exports = {
     getPaciente,
     createPaciente,
     updatePaciente,
