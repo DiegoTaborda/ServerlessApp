@@ -1,0 +1,103 @@
+service: dynamodb-crud-api
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: sa-east-1
+  environment:
+    DYNAMODB_TABLE_NAME: ${self:custom.pacientesTableName} 
+
+custom:
+  postsTableName: pacientes-table-${self:provider.stage}
+
+plugins:
+  - serverless-iam-roles-per-function
+
+functions:
+  getPaciente:
+    handler: api.getPaciente
+    name: get-paciente
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: paciente/{pacienteId}
+          method: GET
+    iamRoleStatements: 
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:GetItem"
+        Resource: !GetAtt PacientesTable.Arn
+  createPaciente:
+    handler: api.createPaciente
+    name: create-paciente
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: paciente
+          method: POST
+    iamRoleStatements: 
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:PutItem"
+        Resource: !GetAtt PacientesTable.Arn
+  updatePaciente:
+    handler: api.updatePaciente
+    name: update-paciente
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: paciente/{pacienteId}
+          method: PUT
+    iamRoleStatements: 
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:UpdateItem"
+        Resource: !GetAtt PacientesTable.Arn
+  deletePaciente:
+    handler: api.deletePaciente
+    name: delete-paciente
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: paciente/{pacienteId}
+          method: DELETE
+    iamRoleStatements: 
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:DeleteItem"
+        Resource: !GetAtt PacientesTable.Arn
+  getAllPaciente:
+    handler: api.getAllPaciente
+    name: get-all-paciente
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: pacientes
+          method: GET
+    iamRoleStatements: 
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:Scan"
+        Resource: !GetAtt PacientesTable.Arn
+
+resources:
+  Resources: 
+    PacientesTable: 
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.pacientesTableName}
+        AttributeDefinitions:
+          - AttributeName: postId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: postId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
