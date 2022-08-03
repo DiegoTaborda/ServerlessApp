@@ -9,7 +9,12 @@ const {
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const getPaciente = async (event) => {
-    const response = { statusCode: 200 };
+    const response = { 
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        }
+        };
 
     try {
         const params = {
@@ -71,7 +76,12 @@ const createPaciente = async (event) => {
 }; 
 
 const updatePaciente = async (event) => {
-    const response = { statusCode: 200 };
+    const response = { 
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        }
+        };
 
     try {
         const body = JSON.parse(event.body);
@@ -109,7 +119,12 @@ const updatePaciente = async (event) => {
 };
 
 const deletePaciente = async (event) => {
-    const response = { statusCode: 200 };
+    const response = { 
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        }
+        };
 
     try {
         const params = {
