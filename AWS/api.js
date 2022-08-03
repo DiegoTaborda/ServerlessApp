@@ -38,7 +38,12 @@ const getPaciente = async (event) => {
 };
 
 const createPaciente = async (event) => {
-    const response = { statusCode: 200 };
+    const response = { 
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        }
+        };
 
     try {
         const body = JSON.parse(event.body);
@@ -132,7 +137,12 @@ const deletePaciente = async (event) => {
 };
 
 const getAllPacientes = async () => {
-    const response = { statusCode: 200 };
+    const response = { 
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+        }
+    };
 
     try {
         const { Items } = await db.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
