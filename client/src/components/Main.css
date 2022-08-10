@@ -1,0 +1,47 @@
+.main {
+  background: #fff;
+  padding: 30px;
+  margin: 50px auto;
+  max-width: 650px;
+  border-radius: 6px;
+}
+
+.lista{
+  background: #fff;
+  padding: 30px;
+  margin: 50px auto;
+  max-width: 650px;
+  border-radius: 6px;
+}
+
+.main h1 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input{
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+
+input[type="text"],[type="email"] {
+  width: 60%;
+}
+
+input[type="date"] {
+  width: 30%;
+}
+
+li {
+  font-size: 12px;
+  color: red;
+  list-style-type: none;
+}
